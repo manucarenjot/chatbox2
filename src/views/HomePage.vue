@@ -13,7 +13,7 @@
         <input type="password" name="password" id="password" v-model="passwordData">
         <br>
         <br>
-        <input type="button" @click="login" title="Se connecter">
+        <input type="button" @click="login" title="Se connecter" value="Se connecter">
       </form>
       <br><br><br>
       <button @click="flip">Créer un compte</button>
@@ -92,7 +92,6 @@ export default {
 
             if (sessionStorage['user']) {
               this.etat = sessionStorage['Connected']
-              console.log(this.etat)
             }
           }, 100)
         }
