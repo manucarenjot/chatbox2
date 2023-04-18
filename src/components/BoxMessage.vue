@@ -18,8 +18,9 @@ export default {
     return {
       datas: [
         {username : 'Hector', date: 'samedi', message: 'Hola la casa'},
+      ],
 
-      ]
+      username : '',
     }
   },
   computed: {
