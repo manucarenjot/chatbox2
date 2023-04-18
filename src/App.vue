@@ -1,15 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <BoxMessage/>
+  <SubMessage/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BoxMessage from "@/components/BoxMessage";
+import SubMessage from "@/components/SubMessage";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BoxMessage,
+    SubMessage
   }
 }
 </script>
