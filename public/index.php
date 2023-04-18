@@ -18,6 +18,12 @@ switch ($page) {
     case 'get-messages':
         Routeur::route('GetMessages', $action);
         break;
+    case 'user-connect':
+        Routeur::route('ConnectUser', $action);
+        break;
+    case 'new-user':
+        Routeur::route('UserRegister', $action);
+        break;
 
 
     default:

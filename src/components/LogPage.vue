@@ -1,7 +1,7 @@
 <template>
   <div id="log-page">
     <div id="login-card" v-bind:class="classeLogin" v-if="card === 'login'">
-      <form action="">
+      <form method="post" action="http://localhost:8000/?c=user-connect">
         <h1>Connexion</h1>
         <label for="username"><b>Nom d'utilisateur :</b></label>
         <br>
@@ -13,22 +13,22 @@
         <input type="password" name="password" id="password">
         <br>
         <br>
-        <input type="submit" name="send" value="Se connecter">
+        <input type="submit" name="send" title="Se connecter">
       </form>
       <br><br><br>
       <button @click="flip">Créer un compte</button>
     </div>
     <div id="register-card" v-bind:class="classeRegister" v-else>
-      <form action="">
+      <form method="post" action="http://localhost:8000/?c=new-user">
         <h1>Inscription</h1>
         <label for="username-register"><b>Nom d'utilisateur :</b></label>
         <br>
-        <input type="text" name="username" id="username-register">
+        <input type="text" name="new-username" id="username-register">
         <br>
         <br>
         <label for="password-register"><b>Mot de passe :</b></label>
         <br>
-        <input type="password" name="password" id="password-register">
+        <input type="password" name="new-password" id="password-register">
         <br>
         <br>
         <label for="password-repeat"><b>répéter le mot de passe :</b></label>
@@ -36,7 +36,7 @@
         <input type="password" name="password-repeat" id="password-repeat">
         <br>
         <br>
-        <input type="submit" name="send" value="S'inscrire">
+        <input type="submit" name="send" title="S'inscrire">
       </form>
       <br><br><br>
       <button @click="flip">Se connecter</button>

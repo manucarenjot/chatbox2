@@ -1,4 +1,5 @@
 <?php
+
 class MessageController extends AbstractController
 {
 
@@ -6,8 +7,7 @@ class MessageController extends AbstractController
     public function index()
     {
         // TODO: Implement index() method.
-
-
+        if (isset($_POST['send'])) {
             $username = htmlentities($_POST['username']);
             $message = strip_tags($_POST['message']);
 
@@ -20,12 +20,14 @@ class MessageController extends AbstractController
                 ->setMessage($message);
             Message::addMessage($messageData);
 
+        }
+
+
     }
 
 
-
-
-        public  function getMessages() {
+    public function getMessages()
+    {
         require_once(dirname(__DIR__) . '/models/Message.php');
 
         $model = new Message();
