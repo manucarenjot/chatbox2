@@ -8,7 +8,7 @@ class MessageController extends AbstractController
     {
         // TODO: Implement index() method.
         if (isset($_POST['send'])) {
-            $username = htmlentities($_POST['username']);
+            $username = htmlentities($_POST['usernameMessage']);
             $message = strip_tags($_POST['message']);
 
             echo "send recu " . $message . " de " . $username;

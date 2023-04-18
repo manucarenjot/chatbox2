@@ -5,15 +5,15 @@
         <h1>Connexion</h1>
         <label for="username"><b>Nom d'utilisateur :</b></label>
         <br>
-        <input type="text" name="username" id="username">
+        <input type="text" name="username" id="username" v-model="username">
         <br>
         <br>
         <label for="password"><b>Mot de passe :</b></label>
         <br>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" v-model="password">
         <br>
         <br>
-        <input type="submit" name="send" title="Se connecter">
+        <input type="button" @click="login" title="Se connecter">
       </form>
       <br><br><br>
       <button @click="flip">Créer un compte</button>
@@ -49,13 +49,19 @@
 </template>
 
 <script>
+const axios = require('axios');
+
 export default {
   name: "LogPage",
   data() {
     return {
       classeLogin : 'front-face',
       classeRegister : 'flip',
-      card : 'login'
+      card : 'login',
+      statut : '',
+
+      username : '',
+      password : ''
     }
   },
 
@@ -75,7 +81,29 @@ export default {
           this.classeLogin = 'front-face'
         }, 400)
       }
+    },
 
+    login: function() {
+      if (this.username !== '' && this.password !== '') {
+        axios.post('http://localhost:8000/?c=user-connect', {
+          request: 1,
+          username: this.username,
+          password: this.password
+        })
+            .then(function(response) {
+              console.log(response);
+              if (response.data[0].status === 1) {
+                this.statut = 'connected';
+              } else {
+                alert("User does not exist");
+              }
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+      } else {
+        alert('Please enter username & password');
+      }
     }
   }
 }

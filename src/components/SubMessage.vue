@@ -1,7 +1,7 @@
 <template>
   <form method="post" action="http://localhost:8000/?c=new-message">
-    <label for="username">Username : </label>
-           <input type="text" name="username" id="username" v-model="usernameData">
+    <label for="usernameMessage">Username : </label>
+    <input type="text" name="username" id="usernameMessage" :value="username">
     <br>
     <label for="message">Message : </label>
     <input type="text" name="message" id="message" v-model="messageData">
@@ -21,6 +21,8 @@ export default {
       usernameData : ''
     }
   },
+  props: ['username'],
+
 
   methods: {
     sub() {

@@ -12,6 +12,7 @@ require __DIR__ . '/../controllers/ErrorController.php';
 require __DIR__ . '/../models/Message.php';
 require __DIR__ . '/../models/User.php';
 require __DIR__ . '/../models/MessageEntity.php';
+require __DIR__ . '/../models/UserEntity.php';
 
 require __DIR__ . '/../Config/Routeur.php';
 require __DIR__ . '/../Config/Connect.php';
