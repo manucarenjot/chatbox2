@@ -46,6 +46,7 @@
 
   <BoxMessage v-if="etat === 'connected'" ></BoxMessage>
   <SubMessage :username="user" v-if="etat === 'connected'"></SubMessage>
+  {{getCookie}}
 </template>
 
 <script>
@@ -53,12 +54,15 @@
 import BoxMessage from "@/components/BoxMessage";
 import SubMessage from "@/components/SubMessage";
 import axios from "axios";
+
+let cookie = (sessionStorage['user']);
+console.log(cookie)
 export default {
   name: "HomePage",
   data(){
     return {
         user : [
-            ''
+          (sessionStorage['user'])
         ],
         classeLogin : 'front-face',
         classeRegister : 'flip',
@@ -77,6 +81,23 @@ export default {
   created() {
 
 
+  },
+
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+      getCookie() {
+        if (this.etat ==='') {
+          // eslint-disable-next-line vue/no-async-in-computed-properties
+          setInterval(()=> {
+
+            if (sessionStorage['user']) {
+              this.etat = sessionStorage['Connected']
+              console.log(this.etat)
+            }
+          }, 100)
+        }
+
+      }
   },
 
   methods: {
@@ -108,9 +129,8 @@ export default {
           password: this.passwordData
         })
             .then((response)=> {
-              this.user = response.data;
-              this.etat = 'connected'
-              console.log(response);
+              sessionStorage['user'] = response.data
+              sessionStorage['Connected'] = 'connected'
               if (response.data !== usernameData) {
                 alert(response.data);
               }
