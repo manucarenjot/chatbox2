@@ -34,9 +34,7 @@ export default {
               this.datas = response.data
             })
       }, 1000)
-
-    }
-
+    },
   },
 
 
@@ -46,11 +44,14 @@ export default {
           console.log(response.data)
           this.datas = response.data
         })
-
   },
 
 
+
+
 }
+
+
 </script>
 
 <style scoped>

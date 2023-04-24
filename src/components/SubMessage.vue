@@ -19,7 +19,7 @@ export default {
     return {
       messageData : '',
       usernameData : '',
-      messageColor : '#282727'
+      messageColor : ''
     }
   },
   props: ['username'],
