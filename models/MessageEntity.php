@@ -3,6 +3,24 @@ class MessageEntity
 {
     private string $message;
     private string $username;
+    private string $color;
+
+    /**
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+        return $this;
+    }
 
     /**
      * @return string

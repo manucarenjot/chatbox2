@@ -6,10 +6,13 @@ class MessageController extends AbstractController
 
     public function index()
     {
+
+
         // TODO: Implement index() method.
         if (isset($_POST['send'])) {
             $username = htmlentities($_POST['usernameMessage']);
             $message = strip_tags($_POST['message']);
+            $color = htmlentities($_POST['color-message']);
 
             echo "send recu " . $message . " de " . $username;
 
@@ -17,7 +20,8 @@ class MessageController extends AbstractController
 
             $messageData
                 ->setUsername($username)
-                ->setMessage($message);
+                ->setMessage($message)
+                ->setColor($color);
             Message::addMessage($messageData);
 
         }

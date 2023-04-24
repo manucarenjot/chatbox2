@@ -5,6 +5,7 @@
     <br>
     <label for="message">Message : </label>
     <input type="text" name="message" id="message" v-model="messageData">
+    <input type="color" name="color-message" v-model="messageColor">
     <input type="submit" name="send" value="➤">
   </form>
 </template>
@@ -17,24 +18,36 @@ export default {
   data() {
     return {
       messageData : '',
-      usernameData : ''
+      usernameData : '',
+      messageColor : '#282727'
     }
   },
   props: ['username'],
 
 
   methods: {
-    sub() {
-      axios.post('http://localhost:8000/?c=new-message', {
-        message: this.messageData,
-        username: this.usernameData
-      })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+    sub: function() {
+
+
+      if (this.messageData !== '' && this.usernameData !== '') {
+
+        axios.post('http://localhost:8000/?c=new-message', {
+          request: 1,
+          username: this.usernameData,
+          message: this.messageData,
+          color : this.messageColor
+        })
+            .then((response)=> {
+              if (response.data !== 0) {
+                alert("envoi du message réussi");
+              }
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+      } else {
+        alert('Erreur lors de l\'envoi du message');
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div id="box">
-    <div class="message" v-for="data in datas" :key="data.id">
+    <div class="message" v-for="data in datas" :key="data.id"
+         :style="{ color: data.color_message }">
         {{actualiser}}
       <p><b>{{ data.username }} à {{ data.date }}</b></p>
       <p>{{ data.message }}</p>
@@ -17,7 +18,7 @@ export default {
   data() {
     return {
       datas: [
-        {username : 'Hector', date: 'samedi', message: 'Hola la casa'},
+        {username : 'Hector', date: 'samedi', message: 'Hola la casa', color: ''},
       ],
 
       username : '',
@@ -53,5 +54,13 @@ export default {
 </script>
 
 <style scoped>
+#box {
+  height: 500px;
+  overflow-y: scroll;
+  overscroll-behavior-y: auto;
+}
 
+.message {
+  transform: translateY(0%);
+}
 </style>
