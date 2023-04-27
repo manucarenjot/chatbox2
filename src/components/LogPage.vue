@@ -5,15 +5,15 @@
         <h1>Connexion</h1>
         <label for="username"><b>Nom d'utilisateur :</b></label>
         <br>
-        <input type="text" name="username" id="username" v-model="username">
+        <input type="text" name="username" id="username" v-model="usernameData">
         <br>
         <br>
         <label for="password"><b>Mot de passe :</b></label>
         <br>
-        <input type="password" name="password" id="password" v-model="password">
+        <input type="password" name="password" id="password" v-model="passwordData">
         <br>
         <br>
-        <input type="button" @click="login" title="Se connecter">
+        <input type="button" @click="login" title="Se connecter" value="Se connecter">
       </form>
       <br><br><br>
       <button @click="flip">Créer un compte</button>
@@ -58,10 +58,9 @@ export default {
       classeLogin : 'front-face',
       classeRegister : 'flip',
       card : 'login',
-      statut : '',
-
-      username : '',
-      password : ''
+      etat : '',
+      usernameData : '',
+      passwordData : ''
     }
   },
 
@@ -84,25 +83,27 @@ export default {
     },
 
     login: function() {
-      if (this.username !== '' && this.password !== '') {
+      if (this.usernameData !== '' && this.passwordData !== '') {
+        let usernameData = this.usernameData;
         axios.post('http://localhost:8000/?c=user-connect', {
           request: 1,
-          username: this.username,
-          password: this.password
+          username: this.usernameData,
+          password: this.passwordData
         })
-            .then(function(response) {
-              console.log(response);
-              if (response.data[0].status === 1) {
-                this.statut = 'connected';
-              } else {
-                alert("User does not exist");
+            .then((response)=> {
+              if (response.data === usernameData) {
+                alert('connected')
+                sessionStorage['user'] = response.data
+                sessionStorage['Connected'] = 'connected'
+                window.location.href = "http://localhost:8080";
+              }
+              else {
+                alert('Please enter username & password');
               }
             })
             .catch(function(error) {
               console.log(error);
             });
-      } else {
-        alert('Please enter username & password');
       }
     }
   }

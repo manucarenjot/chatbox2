@@ -1,11 +1,12 @@
 <template>
-  <div id="box">
-    <div class="message" v-for="data in datas" :key="data.id"
+  <div id="box" ref="chatbox" >
+    <div class="message" v-for="data in datas.reverse()" :key="data.id"
          :style="{ color: data.color_message }">
-        {{actualiser}}
+      {{ actualiser }}
       <p><b>{{ data.username }} à {{ data.date }}</b></p>
       <p>{{ data.message }}</p>
     </div>
+
   </div>
 </template>
 
@@ -13,28 +14,40 @@
 
 const axios = require('axios');
 
+
 export default {
   name: "BoxMessage",
   data() {
     return {
       datas: [
-        {username : 'Hector', date: 'samedi', message: 'Hola la casa', color: ''},
+        {username: 'Hector', date: 'samedi', message: 'Hola la casa', color: ''},
       ],
 
-      username : '',
+      username: '',
     }
   },
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     actualiser() {
       // eslint-disable-next-line vue/no-async-in-computed-properties
-      setInterval(()=> {
+      setInterval(() => {
         axios.get("http://localhost:8000?c=get-messages")
             .then((response) => {
               this.datas = response.data
             })
       }, 1000)
     },
+
+  },
+
+  methods: {
+    scrollToBottom() {
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      this.$nextTick(() => {
+        const chatbox = this.$refs.chatbox;
+        chatbox.scrollTop = chatbox.scrollHeight;
+      });
+    }
   },
 
 
@@ -43,8 +56,10 @@ export default {
         .then((response) => {
           console.log(response.data)
           this.datas = response.data
+          this.scrollToBottom()
         })
   },
+
 
 
 

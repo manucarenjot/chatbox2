@@ -118,8 +118,6 @@ export default {
     },
 
     login: function() {
-
-
       if (this.usernameData !== '' && this.passwordData !== '') {
         let usernameData = this.usernameData;
         axios.post('http://localhost:8000/?c=user-connect', {
@@ -128,17 +126,17 @@ export default {
           password: this.passwordData
         })
             .then((response)=> {
-              sessionStorage['user'] = response.data
-              sessionStorage['Connected'] = 'connected'
-              if (response.data !== usernameData) {
-                alert(response.data);
+              if (response.data === usernameData) {
+                sessionStorage['user'] = response.data
+                sessionStorage['Connected'] = 'connected'
+              }
+              else {
+                alert('Please enter username & password');
               }
             })
             .catch(function(error) {
               console.log(error);
             });
-      } else {
-        alert('Please enter username & password');
       }
     }
   }

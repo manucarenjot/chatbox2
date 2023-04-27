@@ -29,7 +29,7 @@ class Message
 
     public static function selectMessage()
     {
-        $get = Connect::getPDO()->prepare("SELECT * FROM message order by id desc limit 50");
+        $get = Connect::getPDO()->prepare("SELECT * FROM message order by id desc limit 15");
 
         if ($get->execute()) {
             $get->setFetchMode(\PDO::FETCH_ASSOC);
