@@ -3,8 +3,8 @@
     <div class="message" v-for="data in datas.reverse()" :key="data.id"
          :style="{ color: data.color_message }">
       {{ actualiser }}
-      <p><b><span style="color: black">{{ data.hours}}</span> {{ data.username }} :
-        </b> <span style="color: black; word-break: break-word;
+      <p><b><span style="color: #ffffff">{{ data.hours}}</span> {{ data.username }} :
+        </b> <span style="color: #fff6f6; word-break: break-word;
     white-space: normal;">{{ data.message }}</span></p>
     </div>
 
@@ -27,6 +27,7 @@ export default {
       username: '',
     }
   },
+
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     actualiser() {
@@ -72,14 +73,35 @@ export default {
 
 <style scoped>
 #box {
-  width: 30%;
-  height: 500px;
+  width: 580px;
+  height: 450px;
   border: #42b983 5px ridge;
+  border-bottom: none;
+  border-radius: 4% 4% 0 0;
   overflow-y: scroll;
   overscroll-behavior-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-content: start;
+  align-items: start;
+  background-color: #2f4141;
+  padding: 10px;
+}
+#box::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#box::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+#box::-webkit-scrollbar-thumb {
+  background: #3bad81;
+  border-radius: 10px;
 }
 
 .message {
