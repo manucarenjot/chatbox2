@@ -1,51 +1,9 @@
 <template>
-  <div id="log-page" v-if="etat === ''">
-    <div id="login-card" v-bind:class="classeLogin" v-if="card === 'login'">
-      <form method="post" action="http://localhost:8000/?c=user-connect">
-        <h1>Connexion</h1>
-        <label for="username"><b>Nom d'utilisateur :</b></label>
-        <br>
-        <input type="text" name="username" id="username" v-model="usernameData">
-        <br>
-        <br>
-        <label for="password"><b>Mot de passe :</b></label>
-        <br>
-        <input type="password" name="password" id="password" v-model="passwordData">
-        <br>
-        <br>
-        <input type="button" @click="login" title="Se connecter" value="Se connecter">
-      </form>
-      <br><br><br>
-      <button @click="flip">Créer un compte</button>
-    </div>
-    <div id="register-card" v-bind:class="classeRegister" v-else>
-      <form method="post" action="http://localhost:8000/?c=new-user">
-        <h1>Inscription</h1>
-        <label for="username-register"><b>Nom d'utilisateur :</b></label>
-        <br>
-        <input type="text" name="new-username" id="username-register">
-        <br>
-        <br>
-        <label for="password-register"><b>Mot de passe :</b></label>
-        <br>
-        <input type="password" name="new-password" id="password-register">
-        <br>
-        <br>
-        <label for="password-repeat"><b>répéter le mot de passe :</b></label>
-        <br>
-        <input type="password" name="password-repeat" id="password-repeat">
-        <br>
-        <br>
-        <input type="submit" name="send" title="S'inscrire">
-      </form>
-      <br><br><br>
-      <button @click="flip">Se connecter</button>
-    </div>
-  </div>
 
 
-  <BoxMessage v-if="etat === 'connected'" ></BoxMessage>
+  <BoxMessage></BoxMessage>
   <SubMessage :username="user" v-if="etat === 'connected'"></SubMessage>
+  <div id="not-connected" v-if="etat !== 'connected'">Veuillez vous connecter pour intéragir avec le chat</div>
   {{getCookie}}
 </template>
 
@@ -206,6 +164,13 @@ button {
 @keyframes flip {
   from {opacity: 100%}
   to {opacity: 0;}
+}
+
+#not-connected {
+  width: 30%;
+  background-color: #ff5900;
+  border: #ff5900 5px solid;
+  border-radius: 3px;
 }
 
 </style>

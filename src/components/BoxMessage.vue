@@ -3,8 +3,9 @@
     <div class="message" v-for="data in datas.reverse()" :key="data.id"
          :style="{ color: data.color_message }">
       {{ actualiser }}
-      <p><b>{{ data.username }} à {{ data.date }}</b></p>
-      <p>{{ data.message }}</p>
+      <p><b><span style="color: black">{{ data.hours}}</span> {{ data.username }} :
+        </b> <span style="color: black; word-break: break-word;
+    white-space: normal;">{{ data.message }}</span></p>
     </div>
 
   </div>
@@ -20,7 +21,7 @@ export default {
   data() {
     return {
       datas: [
-        {username: 'Hector', date: 'samedi', message: 'Hola la casa', color: ''},
+        {username: 'Hector',  date : 'samedi', hours : '', message: 'Hola la casa', color: ''},
       ],
 
       username: '',
@@ -71,9 +72,14 @@ export default {
 
 <style scoped>
 #box {
+  width: 30%;
   height: 500px;
+  border: #42b983 5px ridge;
   overflow-y: scroll;
   overscroll-behavior-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .message {
