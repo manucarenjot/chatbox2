@@ -1,19 +1,47 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/log" v-if="etat!== 'connected'">Connexion</router-link> |
+    <router-link to="/log" v-if="etat!== 'connected'">Connexion</router-link>
+    <router-link to="/log" v-else @click="logout">Deconnexion</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
   <router-view/>
+  {{getCookie}}
 </template>
 <script>
 
 
 export default {
   name: "app",
-  components: {
+  data() {
+    return {
+      etat : ''
+    }
+  },
 
-  }
+  methods: {
+    logout() {
+      sessionStorage.removeItem('Connected');
+      sessionStorage.removeItem('user')
+      this.etat = ''
+    }
+  },
+
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    getCookie() {
+      if (this.etat ==='') {
+        // eslint-disable-next-line vue/no-async-in-computed-properties
+        setInterval(()=> {
+
+          if (sessionStorage['user']) {
+            this.etat = sessionStorage['Connected']
+          }
+        }, 100)
+      }
+
+    }
+  },
 }
 </script>
 

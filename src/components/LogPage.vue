@@ -1,5 +1,8 @@
 <template>
-  <div id="log-page">
+  {{getCookie}}
+  <div id="connected" v-if="etat === 'connected'"><b>Vous êtes déjà connecté, vous allez être redirigé sur la page d'accueil
+    dans {{count}} secondes{{counter}}</b></div>
+  <div id="log-page" v-else>
     <div id="login-card" v-bind:class="classeLogin" v-if="card === 'login'">
       <form method="post" action="http://localhost:8000/?c=user-connect">
         <h1>Connexion</h1>
@@ -51,6 +54,7 @@
 <script>
 const axios = require('axios');
 
+
 export default {
   name: "LogPage",
   data() {
@@ -60,7 +64,8 @@ export default {
       card : 'login',
       etat : '',
       usernameData : '',
-      passwordData : ''
+      passwordData : '',
+      count : 15
     }
   },
 
@@ -106,7 +111,32 @@ export default {
             });
       }
     }
-  }
+  },
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    getCookie() {
+      if (this.etat ==='') {
+        // eslint-disable-next-line vue/no-async-in-computed-properties
+          if (sessionStorage['user']) {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.etat = sessionStorage['Connected']
+            // eslint-disable-next-line vue/no-async-in-computed-properties
+            setTimeout(()=>{
+              window.location.href = "http://localhost:8080";
+            }, 14000)
+          }
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    counter() {
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      setInterval(()=> {
+        if (this.count > 0) {
+          this.count -= 1
+        }
+      }, 1000)
+    }
+  },
 }
 </script>
 
@@ -173,5 +203,14 @@ button {
 @keyframes flip {
   from {opacity: 100%}
   to {opacity: 0;}
+}
+
+#connected {
+  width: 30%;
+  background-color: #ff4800;
+  border: #ff4800 5px solid;
+  border-radius: 3px;
+  color: white;
+  margin-top: 100px;
 }
 </style>

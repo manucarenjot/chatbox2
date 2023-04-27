@@ -171,6 +171,7 @@ button {
   background-color: #ff5900;
   border: #ff5900 5px solid;
   border-radius: 3px;
+  color: white;
 }
 
 </style>
